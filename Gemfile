@@ -5,7 +5,14 @@ gem 'rails', '3.2.4'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+##
+#  ATENCAO AQUI [gem 'pg']: ALTEREI PARA SUBIR O ARQUIVO PRO HEROKU, POREM O BUNDLE NAO RODOU
+#  POIS O POSTGRE NAO ESTA INSTALADO. 
+#  VERIFICAR SE EH POSSIVEL INSTALAR COM O ESPACO EM DISCO DISPONIVEL
+##
+
+#gem 'mysql2'
+gem 'pg'
 
 gem 'devise'
 
