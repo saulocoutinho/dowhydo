@@ -1,0 +1,6 @@
+<br>
+<br>
+<%= link_to_unless current_page?(topics_path) || current_page?(root_path), 'My Topics', topics_path %> |
+<%= link_to_unless current_page?(friendships_path), 'My Friends', friendships_path %> |  
+<%= link_to_unless current_page?(trends_topics_path), 'Trends', trends_topics_path %> | 
+<%= link_to_unless current_page?(new_topic_path), 'New Topic', new_topic_path %>

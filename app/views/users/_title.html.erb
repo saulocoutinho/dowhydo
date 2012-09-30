@@ -1,0 +1,26 @@
+<!--
+	Shows the title bar with username and links for edit, login or logout, add or remove friend.
+-->
+
+<% if user.present? and user_signed_in?%>
+	<b> <%= user.email %> </b>
+	
+	<% if current_user.id == user.id %>
+		<%= link_to 'Edit', edit_user_path(user) %>
+	<% elsif current_user.is_my_friend?(user) %>
+		<% friendship = current_user.friendships.where(:friend_id => user.id).first %>
+		<% friendship ||= user.friendships.where(:friend_id => current_user.id).first %>
+		<%= link_to "Remove Friend", friendship_path(friendship), :method => :delete %>
+	<% else %>
+		<%= link_to "Add Friend", friendships_path(:friend_id => user.id), :method => :post %>
+	<% end %>
+	
+	<%= link_to 'Logout', destroy_user_session_path, :method => :delete %>
+
+<% elsif user_signed_in? %>
+	<b> <%= current_user.email %> </b>
+	<%= link_to 'Logout', destroy_user_session_path, :method => :delete %>
+ 
+  	<% else %>
+	<%= link_to "Login", new_user_session_path %>
+<% end %>

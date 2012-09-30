@@ -1,0 +1,17 @@
+<h1>New argument</h1>
+
+<%= form_for [ topic, argument ] do |f| %>
+  <%= error_messages_for argument %>
+
+  <div class="field">
+    <%= f.label :arg %><br />
+    <%= f.text_area :arg, :rows => 10, :cols => 90 %>
+  </div>
+  <div class="field">
+    <%= f.label :kind %><br />
+    <%= f.text_field :kind %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

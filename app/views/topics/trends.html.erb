@@ -1,0 +1,35 @@
+<!--
+	Shows the top 10 topics.
+	Render arguments/main.html.erb whit the most voted arguments WHY and WHY NOT	
+-->
+
+<%= render 'layouts/top'%>
+
+<br><br>
+
+<% @topics.each do |topic| %>
+<table>
+  <tr>
+  	<td><b><%= link_to topic.title, topic%></b></td>
+  </tr>
+  <tr>
+	<td>
+		<% if topic.user == current_user %>
+		<% user = 'me'%>
+		<% end %>
+		by <%= link_to user ||= topic.user.email, user_path(topic.user) %>
+	</td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td><b>Do? </b></td> 
+    <td><%= button_to topic.topic_votes.where(['kind = ?', 1]).count.to_s + ' Yes',
+  		{ :controller => "topics", :topic_id => topic.id, :action => "doo" }, method: :post %></td>
+    <td><%= button_to topic.topic_votes.where(['kind = ?', 0]).count.to_s + ' No', 
+    	{ :controller => "topics", :topic_id => topic.id, :action => "dont" }, method: :post %></td>
+  </tr> 
+</table>
+  <%= render 'arguments/index', :arguments => topic.main %>
+<% end %>
+

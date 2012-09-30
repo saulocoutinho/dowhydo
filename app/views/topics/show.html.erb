@@ -1,0 +1,32 @@
+<%= render 'layouts/top'%>
+<br><br>
+
+<table>
+	<tr>
+		<td>
+			<b><%= @topic.title %></b>
+		</td>
+  		<% if @topic.user == current_user %>
+	    	<td><%= link_to 'Destroy', topic_path, confirm: 'Are you sure?', method: :delete %></td>
+	    <% end %>
+	</tr>
+	<tr>
+		<td>
+			by <%= link_to_unless current_user == @topic.user, @topic.user.email, user_path(@topic.user) %>
+		</td>
+	</tr>
+</table>
+<table>
+	<tr>
+  		<td align="right">
+  			<b>Do?</b>
+  		</td> 
+	    <td><%= button_to @topic.topic_votes.where(['kind = ?', 1]).count.to_s + ' Yes', { :controller => "topics", :topic_id => @topic.id, :action => "doo" }, method: :post %></td>
+	    <td><%= button_to @topic.topic_votes.where(['kind = ?', 0]).count.to_s + ' No', { :controller => "topics", :topic_id => @topic.id, :action => "dont" }, method: :post %></td>
+ 	</tr>
+</table>
+
+		
+<%= render 'arguments/index', :arguments => @topic.arguments %>
+
+<%= render 'arguments/form', :topic => @topic, :argument => Argument.new %>

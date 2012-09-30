@@ -1,0 +1,31 @@
+<table>
+	<% arguments.each do |argument| %>
+	  <% if not argument == nil %>
+	  <tr>
+	    <td>
+	    	<%= argument.arg %>
+	    </td>
+	    <td>
+	    	<%= button_to argument.argument_votes.count.to_s + ' Vote', { :controller => "arguments",
+	     	:topic_id => argument.topic_id, :argument_id => argument.id, :action => "vote" },
+	     	method: :post %> 
+	    </td>
+	    <td>
+	    	<% if argument.user == current_user %>
+	    		<%= link_to 'Destroy', topic_argument_path(argument.topic_id, argument.id),
+	          	confirm: 'Are you sure?', method: :delete %>
+	        <% end %>
+	    </td>
+	  </tr>
+	  
+	  <tr>
+	  	<td>
+	  		<% if argument.user == current_user %>
+				<% user = 'me'%>
+			<% end %>
+			by <%= link_to user ||= argument.user.email, user_path(argument.user) %> at <%= argument.created_at %> 
+	  	</td>	  	
+	  </tr>
+	  <% end %>
+	<% end %>
+</table>

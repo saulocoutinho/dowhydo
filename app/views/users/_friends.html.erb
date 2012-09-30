@@ -1,0 +1,28 @@
+<!--
+	Shows user friends 
+	This partial is rendered by users/show.html.erb
+-->
+
+<h2>Friends</h2>
+<ul>
+  <% for friendship in Friendship.where(['friend_id = ? OR user_id = ?', @user.id, @user.id]) %>
+    <li>
+    	<% if @user.id == friendship.friend.id %>
+    	
+    	<%=h friendship.user.email %> 
+    	<% if current_user.id == @user.id %>
+    	(<%= link_to "remove", friendship, :method => :delete %>)
+    	<% end %>
+    	
+    	<% else %>
+    	
+    	<%=h friendship.friend.email %>
+    	<% if current_user.id == @user.id%>
+    	(<%= link_to "remove", friendship, :method => :delete %>)
+    	<% end %>
+    	
+    	<% end %>
+     	
+    </li>
+  <% end %>
+</ul>
