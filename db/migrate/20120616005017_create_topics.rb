@@ -3,8 +3,8 @@ class CreateTopics < ActiveRecord::Migration
     create_table :topics do |t|
       t.text :title
       t.integer :count, :default => 0
-      t.references :user
       t.string :user_email
+      t.references :user
 
       t.timestamps
     end
