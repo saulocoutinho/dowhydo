@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20120620184855) do
     t.integer  "count",      :default => 0
     t.string   "title"
     t.integer  "topic_user_id"
+    t.string   "topic_user_email"
     t.string   "user_email"
     t.integer  "user_id"
     t.integer  "topic_id"
