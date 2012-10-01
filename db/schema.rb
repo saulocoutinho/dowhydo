@@ -25,8 +25,11 @@ ActiveRecord::Schema.define(:version => 20120620184855) do
 
   create_table "arguments", :force => true do |t|
     t.text     "arg"
-    t.integer  "kind"
+    t.string   "kind"
     t.integer  "count",      :default => 0
+    t.string   "title"
+    t.integer  "topic_user_id"
+    t.string   "user_email"
     t.integer  "user_id"
     t.integer  "topic_id"
     t.datetime "created_at",                :null => false
@@ -57,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20120620184855) do
   create_table "topics", :force => true do |t|
     t.text     "title"
     t.integer  "count",      :default => 0
+    t.string   "user_email"
     t.integer  "user_id"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
